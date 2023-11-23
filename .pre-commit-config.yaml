@@ -1,0 +1,42 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: check-added-large-files
+        args: ['--enforce-all, --maxkb=100']
+      - id: check-builtin-literals
+      - id: check-case-conflict
+      - id: check-merge-conflict
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+  - repo: https://github.com/psf/black
+    rev: 23.7.0
+    hooks:
+      - id: black
+  - repo: https://github.com/pycqa/pylint
+    rev: v2.17.5
+    hooks:
+      - id: pylint
+        args: ["--disable=import-error,missing-module-docstring"]
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.5.1
+    hooks:
+    -   id: mypy
+        args: ["--show-error-codes", "--ignore-missing-imports"]
+        additional_dependencies: ['types-requests']
+  - repo: https://github.com/pycqa/isort
+    rev: 5.11.5
+    hooks:
+      - id: isort
+        args: [--profile=black]
+  - repo: https://github.com/nbQA-dev/nbQA
+    rev: 1.7.0
+    hooks:
+      - id: nbqa-pyupgrade
+      - id: nbqa-mypy
+        args: ["--show-error-codes", "--ignore-missing-imports"]
+      - id: nbqa-pylint
+        args: ["--disable=import-error,missing-module-docstring", "--good-names=id,kg"]
+      - id: nbqa-black
+      - id: nbqa-isort
+        args: [--profile=black]
