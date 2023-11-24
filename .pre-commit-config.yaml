@@ -13,6 +13,11 @@ repos:
     rev: 23.7.0
     hooks:
       - id: black
+  - repo: https://github.com/pycqa/isort
+    rev: 5.11.5
+    hooks:
+      - id: isort
+        args: [--profile=black]
   - repo: https://github.com/pycqa/pylint
     rev: v2.17.5
     hooks:
@@ -24,19 +29,14 @@ repos:
     -   id: mypy
         args: ["--show-error-codes", "--ignore-missing-imports"]
         additional_dependencies: ['types-requests']
-  - repo: https://github.com/pycqa/isort
-    rev: 5.11.5
-    hooks:
-      - id: isort
-        args: [--profile=black]
   - repo: https://github.com/nbQA-dev/nbQA
     rev: 1.7.0
     hooks:
       - id: nbqa-pyupgrade
-      - id: nbqa-mypy
-        args: ["--show-error-codes", "--ignore-missing-imports"]
-      - id: nbqa-pylint
-        args: ["--disable=import-error,missing-module-docstring", "--good-names=id,kg"]
       - id: nbqa-black
       - id: nbqa-isort
         args: [--profile=black]
+      - id: nbqa-pylint
+        args: ["--disable=import-error,missing-module-docstring", "--good-names=id,kg"]
+      - id: nbqa-mypy
+        args: ["--show-error-codes", "--ignore-missing-imports"]
